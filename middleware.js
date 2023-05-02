@@ -3,7 +3,7 @@ import { jwtVerify } from "jose";
 
 export async function middleware(request){
     const secret = new TextEncoder().encode('secret');
-    const jwt = request.cookies.get("myTokenName").value;
+    const jwt = request.cookies.get("myTokenName")?.value;
     
     if(jwt === undefined){
         console.log(secret);
