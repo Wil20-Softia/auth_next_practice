@@ -6,14 +6,11 @@ export async function middleware(request){
     const jwt = request.cookies.get("myTokenName")?.value;
     
     if(jwt === undefined){
-        console.log(secret);
         return NextResponse.redirect(new URL("/login", request.url));
     }
 
     try{
-        console.log(jwt)
-        const {payload} = await jwtVerify(jwt, secret);
-        console.log(payload);
+        await jwtVerify(jwt, secret);
         return NextResponse.next();
     }catch(error){
         console.log(error)
